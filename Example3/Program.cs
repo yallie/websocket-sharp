@@ -84,6 +84,8 @@ namespace Example3
             // Set the document root path.
             httpsv.DocumentRootPath = ConfigurationManager.AppSettings["DocumentRootPath"];
 
+            httpsv.OnWebSocketUpgradeRequest += Httpsv_OnWebSocketUpgradeRequest;
+
             // Set the HTTP GET request event.
             httpsv.OnGet += (sender, e) =>
             {
@@ -166,6 +168,14 @@ namespace Example3
             Console.ReadLine();
 
             httpsv.Stop();
+        }
+
+        private static void Httpsv_OnWebSocketUpgradeRequest(object sender, HttpRequestEventArgs e)
+        {
+            if (!e.Request.RawUrl.Contains("token="))
+            {
+                e.Response.StatusCode = 401;
+            }
         }
     }
 }
