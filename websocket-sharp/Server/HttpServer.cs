@@ -838,6 +838,11 @@ namespace WebSocketSharp.Server
         /// </summary>
         public event EventHandler<HttpRequestEventArgs> OnTrace;
 
+        /// <summary>
+        /// Occurs when the server receives an HTTP GET request to upgrade the protocol to web sockets.
+        /// </summary>
+        public event EventHandler<HttpRequestEventArgs> OnWebSocketUpgradeRequest;
+
         #endregion Public Events
 
         #region Private Methods
@@ -1018,7 +1023,16 @@ namespace WebSocketSharp.Server
                           {
                               if (ctx.Request.IsUpgradeRequest("websocket"))
                               {
-                                  processRequest(ctx.AcceptWebSocket(null));
+                                  var evt = this.OnWebSocketUpgradeRequest;
+                                  evt?.Invoke(this, new HttpRequestEventArgs(ctx, this._docRootPath));
+                                  if (ctx.Response.StatusCode == 200)
+                                  {
+                                      this.processRequest(ctx.AcceptWebSocket(null));
+                                  }
+                                  else
+                                  {
+                                      ctx.Response.Close();
+                                  }
                                   return;
                               }
 
