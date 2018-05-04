@@ -16,7 +16,7 @@ function init() {
 }
 
 function doWebSocket() {
-    websocket = new WebSocket(url);
+    websocket = new WebSocket(url + "?token=123abc");
 
     websocket.onopen = function (e) {
         onOpen(e);
