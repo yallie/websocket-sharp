@@ -4,6 +4,9 @@ Backup*
 _UpgradeReport_Files
 bin
 obj
+packages
+!packages.config
+.vs
 
 *.mdb
 *.pdb
