@@ -878,7 +878,7 @@ namespace WebSocketSharp.Server
     /// <exception cref="ArgumentNullException">
     /// <paramref name="data"/> is <see langword="null"/>.
     /// </exception>
-    protected void Send (byte[] data)
+    protected virtual void Send (byte[] data)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -916,7 +916,7 @@ namespace WebSocketSharp.Server
     ///   The file could not be opened.
     ///   </para>
     /// </exception>
-    protected void Send (FileInfo fileInfo)
+    protected virtual void Send (FileInfo fileInfo)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -941,7 +941,7 @@ namespace WebSocketSharp.Server
     /// <exception cref="ArgumentException">
     /// <paramref name="data"/> could not be UTF-8-encoded.
     /// </exception>
-    protected void Send (string data)
+    protected virtual void Send (string data)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -989,7 +989,7 @@ namespace WebSocketSharp.Server
     ///   No data could be read from <paramref name="stream"/>.
     ///   </para>
     /// </exception>
-    protected void Send (Stream stream, int length)
+    protected virtual void Send (Stream stream, int length)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -1028,7 +1028,7 @@ namespace WebSocketSharp.Server
     /// <exception cref="ArgumentNullException">
     /// <paramref name="data"/> is <see langword="null"/>.
     /// </exception>
-    protected void SendAsync (byte[] data, Action<bool> completed)
+    protected virtual void SendAsync (byte[] data, Action<bool> completed)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -1083,7 +1083,7 @@ namespace WebSocketSharp.Server
     ///   The file could not be opened.
     ///   </para>
     /// </exception>
-    protected void SendAsync (FileInfo fileInfo, Action<bool> completed)
+    protected virtual void SendAsync (FileInfo fileInfo, Action<bool> completed)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -1125,7 +1125,7 @@ namespace WebSocketSharp.Server
     /// <exception cref="ArgumentException">
     /// <paramref name="data"/> could not be UTF-8-encoded.
     /// </exception>
-    protected void SendAsync (string data, Action<bool> completed)
+    protected virtual void SendAsync (string data, Action<bool> completed)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
@@ -1189,7 +1189,7 @@ namespace WebSocketSharp.Server
     ///   No data could be read from <paramref name="stream"/>.
     ///   </para>
     /// </exception>
-    protected void SendAsync (Stream stream, int length, Action<bool> completed)
+    protected virtual void SendAsync (Stream stream, int length, Action<bool> completed)
     {
       if (_websocket == null) {
         var msg = "The current state of the connection is not Open.";
